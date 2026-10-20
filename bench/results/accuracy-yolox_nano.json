@@ -1,0 +1,575 @@
+{
+  "model": "yolox_nano",
+  "split": "report",
+  "settings": {
+    "minScore": 0.4,
+    "tracker": {
+      "high": 0.6,
+      "newScore": 0.7,
+      "buffer": 15
+    },
+    "wape": 0.16567164179104477
+  },
+  "strides": [
+    {
+      "stride": 1,
+      "wape": 0.3823019086176981,
+      "bias": -0.3823019086176981,
+      "truth": 1729,
+      "byGroup": {
+        "vehicle": {
+          "wape": 0.38089622641509435,
+          "bias": -0.38089622641509435,
+          "truth": 1696
+        },
+        "person": {
+          "wape": 0.45454545454545453,
+          "bias": -0.45454545454545453,
+          "truth": 33
+        }
+      }
+    },
+    {
+      "stride": 2,
+      "wape": 0.4175824175824176,
+      "bias": -0.4175824175824176,
+      "truth": 1729,
+      "byGroup": {
+        "vehicle": {
+          "wape": 0.41745283018867924,
+          "bias": -0.41745283018867924,
+          "truth": 1696
+        },
+        "person": {
+          "wape": 0.42424242424242425,
+          "bias": -0.42424242424242425,
+          "truth": 33
+        }
+      }
+    },
+    {
+      "stride": 3,
+      "wape": 0.43898207056101796,
+      "bias": -0.43898207056101796,
+      "truth": 1729,
+      "byGroup": {
+        "vehicle": {
+          "wape": 0.4386792452830189,
+          "bias": -0.4386792452830189,
+          "truth": 1696
+        },
+        "person": {
+          "wape": 0.45454545454545453,
+          "bias": -0.45454545454545453,
+          "truth": 33
+        }
+      }
+    }
+  ],
+  "perSeq": [
+    {
+      "id": "detrac_100_MVI_40905",
+      "group": "vehicle",
+      "truth": {
+        "in": 27,
+        "out": 6
+      },
+      "pred": {
+        "in": 7,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_61_MVI_39031",
+      "group": "vehicle",
+      "truth": {
+        "in": 23,
+        "out": 17
+      },
+      "pred": {
+        "in": 22,
+        "out": 16
+      }
+    },
+    {
+      "id": "detrac_62_MVI_39051",
+      "group": "vehicle",
+      "truth": {
+        "in": 28,
+        "out": 0
+      },
+      "pred": {
+        "in": 8,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_63_MVI_39211",
+      "group": "vehicle",
+      "truth": {
+        "in": 17,
+        "out": 0
+      },
+      "pred": {
+        "in": 17,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_64_MVI_39271",
+      "group": "vehicle",
+      "truth": {
+        "in": 45,
+        "out": 0
+      },
+      "pred": {
+        "in": 43,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_65_MVI_39311",
+      "group": "vehicle",
+      "truth": {
+        "in": 33,
+        "out": 0
+      },
+      "pred": {
+        "in": 31,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_66_MVI_39361",
+      "group": "vehicle",
+      "truth": {
+        "in": 26,
+        "out": 23
+      },
+      "pred": {
+        "in": 26,
+        "out": 23
+      }
+    },
+    {
+      "id": "detrac_67_MVI_39371",
+      "group": "vehicle",
+      "truth": {
+        "in": 31,
+        "out": 22
+      },
+      "pred": {
+        "in": 22,
+        "out": 20
+      }
+    },
+    {
+      "id": "detrac_68_MVI_39401",
+      "group": "vehicle",
+      "truth": {
+        "in": 72,
+        "out": 35
+      },
+      "pred": {
+        "in": 46,
+        "out": 23
+      }
+    },
+    {
+      "id": "detrac_69_MVI_39501",
+      "group": "vehicle",
+      "truth": {
+        "in": 18,
+        "out": 0
+      },
+      "pred": {
+        "in": 17,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_70_MVI_39511",
+      "group": "vehicle",
+      "truth": {
+        "in": 11,
+        "out": 0
+      },
+      "pred": {
+        "in": 8,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_71_MVI_40701",
+      "group": "vehicle",
+      "truth": {
+        "in": 31,
+        "out": 14
+      },
+      "pred": {
+        "in": 31,
+        "out": 1
+      }
+    },
+    {
+      "id": "detrac_72_MVI_40711",
+      "group": "vehicle",
+      "truth": {
+        "in": 13,
+        "out": 22
+      },
+      "pred": {
+        "in": 12,
+        "out": 16
+      }
+    },
+    {
+      "id": "detrac_73_MVI_40712",
+      "group": "vehicle",
+      "truth": {
+        "in": 40,
+        "out": 11
+      },
+      "pred": {
+        "in": 36,
+        "out": 11
+      }
+    },
+    {
+      "id": "detrac_74_MVI_40714",
+      "group": "vehicle",
+      "truth": {
+        "in": 19,
+        "out": 12
+      },
+      "pred": {
+        "in": 16,
+        "out": 10
+      }
+    },
+    {
+      "id": "detrac_75_MVI_40742",
+      "group": "vehicle",
+      "truth": {
+        "in": 0,
+        "out": 21
+      },
+      "pred": {
+        "in": 0,
+        "out": 13
+      }
+    },
+    {
+      "id": "detrac_76_MVI_40743",
+      "group": "vehicle",
+      "truth": {
+        "in": 15,
+        "out": 49
+      },
+      "pred": {
+        "in": 0,
+        "out": 30
+      }
+    },
+    {
+      "id": "detrac_77_MVI_40761",
+      "group": "vehicle",
+      "truth": {
+        "in": 55,
+        "out": 10
+      },
+      "pred": {
+        "in": 4,
+        "out": 9
+      }
+    },
+    {
+      "id": "detrac_78_MVI_40762",
+      "group": "vehicle",
+      "truth": {
+        "in": 19,
+        "out": 37
+      },
+      "pred": {
+        "in": 7,
+        "out": 33
+      }
+    },
+    {
+      "id": "detrac_79_MVI_40763",
+      "group": "vehicle",
+      "truth": {
+        "in": 42,
+        "out": 6
+      },
+      "pred": {
+        "in": 7,
+        "out": 6
+      }
+    },
+    {
+      "id": "detrac_80_MVI_40771",
+      "group": "vehicle",
+      "truth": {
+        "in": 18,
+        "out": 29
+      },
+      "pred": {
+        "in": 13,
+        "out": 21
+      }
+    },
+    {
+      "id": "detrac_81_MVI_40772",
+      "group": "vehicle",
+      "truth": {
+        "in": 17,
+        "out": 19
+      },
+      "pred": {
+        "in": 13,
+        "out": 14
+      }
+    },
+    {
+      "id": "detrac_82_MVI_40773",
+      "group": "vehicle",
+      "truth": {
+        "in": 1,
+        "out": 15
+      },
+      "pred": {
+        "in": 1,
+        "out": 10
+      }
+    },
+    {
+      "id": "detrac_83_MVI_40774",
+      "group": "vehicle",
+      "truth": {
+        "in": 4,
+        "out": 3
+      },
+      "pred": {
+        "in": 4,
+        "out": 1
+      }
+    },
+    {
+      "id": "detrac_84_MVI_40775",
+      "group": "vehicle",
+      "truth": {
+        "in": 16,
+        "out": 16
+      },
+      "pred": {
+        "in": 15,
+        "out": 11
+      }
+    },
+    {
+      "id": "detrac_85_MVI_40792",
+      "group": "vehicle",
+      "truth": {
+        "in": 10,
+        "out": 9
+      },
+      "pred": {
+        "in": 8,
+        "out": 4
+      }
+    },
+    {
+      "id": "detrac_86_MVI_40793",
+      "group": "vehicle",
+      "truth": {
+        "in": 40,
+        "out": 31
+      },
+      "pred": {
+        "in": 28,
+        "out": 25
+      }
+    },
+    {
+      "id": "detrac_87_MVI_40851",
+      "group": "vehicle",
+      "truth": {
+        "in": 16,
+        "out": 19
+      },
+      "pred": {
+        "in": 16,
+        "out": 7
+      }
+    },
+    {
+      "id": "detrac_88_MVI_40852",
+      "group": "vehicle",
+      "truth": {
+        "in": 26,
+        "out": 23
+      },
+      "pred": {
+        "in": 20,
+        "out": 21
+      }
+    },
+    {
+      "id": "detrac_89_MVI_40853",
+      "group": "vehicle",
+      "truth": {
+        "in": 12,
+        "out": 34
+      },
+      "pred": {
+        "in": 5,
+        "out": 20
+      }
+    },
+    {
+      "id": "detrac_90_MVI_40854",
+      "group": "vehicle",
+      "truth": {
+        "in": 27,
+        "out": 31
+      },
+      "pred": {
+        "in": 27,
+        "out": 31
+      }
+    },
+    {
+      "id": "detrac_91_MVI_40855",
+      "group": "vehicle",
+      "truth": {
+        "in": 20,
+        "out": 11
+      },
+      "pred": {
+        "in": 13,
+        "out": 10
+      }
+    },
+    {
+      "id": "detrac_92_MVI_40863",
+      "group": "vehicle",
+      "truth": {
+        "in": 0,
+        "out": 14
+      },
+      "pred": {
+        "in": 0,
+        "out": 5
+      }
+    },
+    {
+      "id": "detrac_93_MVI_40864",
+      "group": "vehicle",
+      "truth": {
+        "in": 0,
+        "out": 56
+      },
+      "pred": {
+        "in": 0,
+        "out": 27
+      }
+    },
+    {
+      "id": "detrac_94_MVI_40891",
+      "group": "vehicle",
+      "truth": {
+        "in": 15,
+        "out": 33
+      },
+      "pred": {
+        "in": 2,
+        "out": 16
+      }
+    },
+    {
+      "id": "detrac_95_MVI_40892",
+      "group": "vehicle",
+      "truth": {
+        "in": 36,
+        "out": 52
+      },
+      "pred": {
+        "in": 1,
+        "out": 31
+      }
+    },
+    {
+      "id": "detrac_96_MVI_40901",
+      "group": "vehicle",
+      "truth": {
+        "in": 22,
+        "out": 11
+      },
+      "pred": {
+        "in": 14,
+        "out": 0
+      }
+    },
+    {
+      "id": "detrac_97_MVI_40902",
+      "group": "vehicle",
+      "truth": {
+        "in": 36,
+        "out": 42
+      },
+      "pred": {
+        "in": 2,
+        "out": 23
+      }
+    },
+    {
+      "id": "detrac_98_MVI_40903",
+      "group": "vehicle",
+      "truth": {
+        "in": 38,
+        "out": 26
+      },
+      "pred": {
+        "in": 15,
+        "out": 2
+      }
+    },
+    {
+      "id": "detrac_99_MVI_40904",
+      "group": "vehicle",
+      "truth": {
+        "in": 6,
+        "out": 12
+      },
+      "pred": {
+        "in": 3,
+        "out": 0
+      }
+    },
+    {
+      "id": "MOT17-02",
+      "group": "person",
+      "truth": {
+        "in": 5,
+        "out": 15
+      },
+      "pred": {
+        "in": 1,
+        "out": 7
+      }
+    },
+    {
+      "id": "MOT17-04",
+      "group": "person",
+      "truth": {
+        "in": 8,
+        "out": 5
+      },
+      "pred": {
+        "in": 6,
+        "out": 4
+      }
+    }
+  ]
+}
