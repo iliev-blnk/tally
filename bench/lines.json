@@ -1,0 +1,6 @@
+{
+  "_": "Counting lines for MOT17, as fractions of width and height, across the main walking flow.",
+  "MOT17-02": { "a": [0.5, 0.4], "b": [0.5, 0.95] },
+  "MOT17-04": { "a": [0.03, 0.5], "b": [0.97, 0.5] },
+  "MOT17-09": { "a": [0.5, 0.3], "b": [0.5, 0.95] }
+}
