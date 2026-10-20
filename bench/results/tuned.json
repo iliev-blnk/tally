@@ -1,0 +1,29 @@
+{
+  "yolox_nano": {
+    "minScore": 0.4,
+    "tracker": {
+      "high": 0.6,
+      "newScore": 0.7,
+      "buffer": 15
+    },
+    "wape": 0.16567164179104477
+  },
+  "yolox_tiny": {
+    "minScore": 0.05,
+    "tracker": {
+      "high": 0.6,
+      "newScore": 0.7,
+      "buffer": 15
+    },
+    "wape": 0.0880597014925373
+  },
+  "yolox_s": {
+    "minScore": 0.05,
+    "tracker": {
+      "high": 0.6,
+      "newScore": 0.7,
+      "buffer": 15
+    },
+    "wape": 0.05223880597014925
+  }
+}

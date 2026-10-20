@@ -1,0 +1,202 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #141618;
+  --fg: #ecece8;
+  --muted: #8d9196;
+  --accent: #f5c400;
+  --sans: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  --mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  /* Read by the overlay canvas (site/view.ts). */
+  --line: #f5c400;
+  --handle: #141618;
+  --box-vehicle: #ffffff;
+  --box-person: #6ad7ff;
+  --zone: rgba(255, 255, 255, 0.28);
+  --flash: #f5c400;
+  --overlay-font: var(--sans);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px / 1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "stage intro" "stage side" "credits credits";
+  gap: 28px 36px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.intro {
+  grid-area: intro;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+}
+
+.intro p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.stage {
+  grid-area: stage;
+  align-self: start;
+  position: relative;
+  background: #000;
+  line-height: 0;
+}
+
+.stage video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.clips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.clips a,
+.clips .own {
+  cursor: pointer;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.clips a:hover,
+.clips .own:hover,
+.clips a[aria-current] {
+  color: var(--fg);
+}
+
+.clips a[aria-current] {
+  text-decoration: underline 2px var(--accent);
+  text-underline-offset: 5px;
+}
+
+.clips input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.clips .own:focus-within {
+  outline: 2px solid var(--accent);
+}
+
+.counts {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.counts th,
+.counts td {
+  padding: 0;
+  font-weight: inherit;
+}
+
+.counts thead th {
+  padding-bottom: 6px;
+  text-align: right;
+  color: var(--accent);
+  font-size: 22px;
+}
+
+.counts tbody th {
+  padding-right: 12px;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.counts tbody td {
+  width: 4.5ch;
+  text-align: right;
+  font-size: 22px;
+}
+
+.counts tr.total th {
+  padding-top: 10px;
+  color: var(--fg);
+}
+
+.counts tr.total td {
+  font-size: 46px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.facts {
+  margin: 0;
+  color: var(--muted);
+  font: 12px / 1.5 var(--mono);
+}
+
+.credits {
+  grid-area: credits;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .stage {
+    margin: 0 -16px;
+  }
+
+  .counts tr.total td {
+    font-size: 38px;
+  }
+}

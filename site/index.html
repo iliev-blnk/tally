@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tally</title>
+    <meta
+      name="description"
+      content="A street counter that runs in your browser: it counts the cars and people crossing a line, by direction, next to the count from the labels."
+    />
+    <script src="./coi-serviceworker.js"></script>
+    <script type="module" src="./main.ts"></script>
+  </head>
+  <body>
+    <div class="page">
+      <header class="intro">
+        <h1>tally</h1>
+        <p>
+          Counts the cars and people that cross a line in street footage, and which way they went.
+          A detector runs on your GPU, or your CPU, right in this page; a tracker follows each
+          object and counts it once when it crosses. The same rule run over the human labels gives
+          the true count beside it. Drag the line, or draw a new one.
+        </p>
+      </header>
+      <div class="stage" id="stage">
+        <video id="video" muted playsinline loop autoplay crossorigin="anonymous"></video>
+        <canvas id="overlay" aria-label="Detections and the counting line"></canvas>
+      </div>
+      <section class="side">
+        <nav class="clips" id="clips" aria-label="Footage">
+          <a href="#junction">Junction</a>
+          <a href="#avenue">Avenue</a>
+          <a href="#street">Street</a>
+          <label class="own">Your own video<input type="file" id="file" accept="video/*" /></label>
+        </nav>
+        <table class="counts" id="counts"></table>
+        <p class="facts" id="facts">loading…</p>
+      </section>
+      <footer class="credits">
+        <span id="source"></span>.
+        <a href="https://github.com/iliev-blnk/tally">Source, method and accuracy</a>.
+      </footer>
+    </div>
+  </body>
+</html>
