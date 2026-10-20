@@ -21,28 +21,36 @@ export function truthCounts(seq: Seq, line: Line): Record<Dir, number> {
   return counter.counts().car
 }
 
-const horizontal = (seq: Seq, y: number): Line => ({ a: [2, y], b: [seq.W - 2, y] })
+type Axis = 'h' | 'v'
 
-/** Width of the line's span covered by ignore zones. */
-function zoneOverlap(seq: Seq, y: number): number {
+/** A full-span line: horizontal at y = at, or vertical at x = at. */
+const lineAt = (seq: Seq, axis: Axis, at: number): Line =>
+  axis === 'h' ? { a: [2, at], b: [seq.W - 2, at] } : { a: [at, 2], b: [at, seq.H - 2] }
+
+/** Fraction of the line's length covered by ignore zones. */
+function zoneOverlap(seq: Seq, axis: Axis, at: number): number {
+  const len = axis === 'h' ? seq.W : seq.H
   const spans = seq.zones
-    .filter((z) => z.y1 <= y && y <= z.y2)
-    .map((z) => [Math.max(0, z.x1), Math.min(seq.W, z.x2)] as const)
-    .sort((a, b) => a[0] - b[0])
+    .filter((z) => (axis === 'h' ? z.y1 <= at && at <= z.y2 : z.x1 <= at && at <= z.x2))
+    .map((z) => (axis === 'h' ? [z.x1, z.x2] : [z.y1, z.y2]))
+    .map(([u1 = 0, u2 = 0]) => [Math.max(0, u1), Math.min(len, u2)] as const)
+    .sort((p, q) => p[0] - q[0])
   let covered = 0
   let end = 0
-  for (const [x1, x2] of spans) {
-    if (x2 <= end) continue
-    covered += x2 - Math.max(x1, end)
-    end = x2
+  for (const [u1, u2] of spans) {
+    if (u2 <= end) continue
+    covered += u2 - Math.max(u1, end)
+    end = u2
   }
-  return covered
+  return covered / len
 }
 
 /**
- * DETRAC: a full-width horizontal line with y in 0.40–0.80 H. Among the heights that overlap the
- * ignore zones least, take the one nearest 0.6 H that keeps at least 75% of the best labelled
- * crossing count (lines near the top cross more, tinier, cars). MOT17: from lines.json.
+ * DETRAC: a full-span line, horizontal (y in 0.40–0.80 H) or vertical (x in 0.25–0.75 W), in
+ * steps of 2%. The orientation of the line with the most labelled crossings wins, since that is
+ * the one across the traffic. Of its positions keeping at least 75% of those crossings, take the
+ * ones overlapping the ignore zones least (within 2% of the length), then the one nearest the
+ * middle (0.6 H or 0.5 W). MOT17: from lines.json.
  */
 export function lineFor(seq: Seq): Line {
   if (seq.set === 'mot17') {
@@ -50,17 +58,26 @@ export function lineFor(seq: Seq): Line {
     if (!l) throw new Error(`no line for ${seq.id} in bench/lines.json`)
     return { a: [l.a[0] * seq.W, l.a[1] * seq.H], b: [l.b[0] * seq.W, l.b[1] * seq.H] }
   }
-  const ys = Array.from({ length: 21 }, (_, i) => Math.round(seq.H * (0.4 + i * 0.02)))
-  const least = Math.min(...ys.map((y) => zoneOverlap(seq, y)))
-  const options = ys
-    .filter((y) => zoneOverlap(seq, y) === least)
-    .map((y) => {
-      const c = truthCounts(seq, horizontal(seq, y))
-      return { y, crossings: c.in + c.out }
-    })
-  const most = Math.max(...options.map((o) => o.crossings))
-  const pick = options
-    .filter((o) => o.crossings >= 0.75 * most)
-    .sort((p, q) => Math.abs(p.y - 0.6 * seq.H) - Math.abs(q.y - 0.6 * seq.H))[0]
-  return horizontal(seq, pick?.y ?? Math.round(seq.H * 0.6))
+  const cands = [
+    ...Array.from({ length: 21 }, (_, i) => ({
+      axis: 'h' as const,
+      at: Math.round(seq.H * (0.4 + i * 0.02)),
+      mid: 0.6 * seq.H,
+    })),
+    ...Array.from({ length: 26 }, (_, i) => ({
+      axis: 'v' as const,
+      at: Math.round(seq.W * (0.25 + i * 0.02)),
+      mid: 0.5 * seq.W,
+    })),
+  ].map((c) => {
+    const t = truthCounts(seq, lineAt(seq, c.axis, c.at))
+    return { ...c, overlap: zoneOverlap(seq, c.axis, c.at), crossings: t.in + t.out }
+  })
+  const top = cands.reduce((p, q) => (q.crossings > p.crossings ? q : p))
+  const busy = cands.filter((c) => c.axis === top.axis && c.crossings >= 0.75 * top.crossings)
+  const least = Math.min(...busy.map((c) => c.overlap))
+  const pick = busy
+    .filter((c) => c.overlap <= least + 0.02)
+    .sort((p, q) => Math.abs(p.at - p.mid) - Math.abs(q.at - q.mid))[0]
+  return lineAt(seq, pick?.axis ?? top.axis, pick?.at ?? top.at)
 }

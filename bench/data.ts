@@ -57,7 +57,10 @@ async function listing(url: string): Promise<Entry[]> {
       const len = cd.readUInt16LE(e + 2)
       if (id === 1) {
         let q = e + 4
-        const next = () => Number(cd.readBigUInt64LE((q += 8) - 8))
+        const next = () => {
+          q += 8
+          return Number(cd.readBigUInt64LE(q - 8))
+        }
         if (raw === 0xffffffff) raw = next()
         if (size === 0xffffffff) size = next()
         if (offset === 0xffffffff) offset = next()

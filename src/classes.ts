@@ -19,3 +19,13 @@ export function group(k: Kind): Group {
 }
 
 export const KINDS: Kind[] = ['car', 'bus', 'truck', 'motorcycle', 'bicycle', 'person']
+
+/**
+ * The kinds each dataset's labels cover. DETRAC labels cars, buses, vans and lorries but not the
+ * (many) bikes and scooters; MOT17 labels people. Detections of other kinds are dropped before
+ * tracking whenever counts are compared with labels.
+ */
+export const LABELLED: Record<Group, Kind[]> = {
+  vehicle: ['car', 'bus', 'truck'],
+  person: ['person'],
+}
