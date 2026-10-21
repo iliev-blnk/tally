@@ -29,4 +29,4 @@ export const MODEL_IDS = Object.keys(MODELS) as ModelId[]
 
 /** Picked by bench/report.ts from the measured accuracy and speed; see the README. */
 export const DEFAULT_GPU: ModelId = 'yolox_s'
-export const DEFAULT_CPU: ModelId = 'yolox_nano'
+export const DEFAULT_CPU: ModelId = 'yolox_tiny'

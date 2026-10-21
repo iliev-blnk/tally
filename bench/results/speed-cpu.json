@@ -1,0 +1,28 @@
+{
+  "device": "cpu",
+  "adapter": "wasm cpu",
+  "browser": "152.0.7977.82",
+  "cpu": "11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz (8 threads)",
+  "models": {
+    "yolox_nano": {
+      "p50": 35.6,
+      "p90": 43.7,
+      "fps": 28.1
+    },
+    "yolox_tiny": {
+      "p50": 101.6,
+      "p90": 133.2,
+      "fps": 9.8
+    },
+    "yolox_s": {
+      "p50": 392,
+      "p90": 584.7,
+      "fps": 2.6
+    },
+    "dfine_s": {
+      "p50": 471.8,
+      "p90": 724.1,
+      "fps": 2.1
+    }
+  }
+}

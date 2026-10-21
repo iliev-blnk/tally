@@ -1,0 +1,28 @@
+{
+  "device": "rtx3050",
+  "adapter": "webgpu nvidia ampere",
+  "browser": "152.0.7977.82",
+  "cpu": "11th Gen Intel(R) Core(TM) i5-11320H @ 3.20GHz (8 threads)",
+  "models": {
+    "yolox_nano": {
+      "p50": 13,
+      "p90": 20.8,
+      "fps": 76.8
+    },
+    "yolox_tiny": {
+      "p50": 16.1,
+      "p90": 22.3,
+      "fps": 62.2
+    },
+    "yolox_s": {
+      "p50": 44.2,
+      "p90": 48.8,
+      "fps": 22.6
+    },
+    "dfine_s": {
+      "p50": 68.9,
+      "p90": 81.8,
+      "fps": 14.5
+    }
+  }
+}
