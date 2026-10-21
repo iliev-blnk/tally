@@ -16,8 +16,8 @@ const SECONDS = 30
 
 /** Busy, two-way windows, found by counting labelled crossings in sliding 30 s windows. */
 const CLIPS = [
-  { name: 'junction', seq: 'detrac_95_MVI_40892', start: 126 },
   { name: 'avenue', seq: 'detrac_68_MVI_39401', start: 1 },
+  { name: 'junction', seq: 'detrac_95_MVI_40892', start: 126 },
   { name: 'street', seq: 'MOT17-04', start: 101 },
 ]
 

@@ -74,3 +74,11 @@ it('counts against the labels and restarts both when a new line is drawn', async
   const arrows = await page.$$eval('#counts thead th', (th) => th.map((t) => t.textContent))
   expect(arrows).toEqual(['↓', '↑'])
 })
+
+it('says so when every frame is pure black', async () => {
+  await page.setInputFiles('#file', 'test/fixtures/black.webm')
+  await page.waitForFunction(() =>
+    /pure black/.test(document.getElementById('facts')?.textContent ?? ''),
+  )
+  expect(await cells('total')).toEqual([0, 0])
+})

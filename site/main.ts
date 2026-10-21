@@ -11,10 +11,11 @@ import type { ClipData } from './clip'
 import './style.css'
 import { arrow, draw, inNormal, palette } from './view'
 
-const CLIPS = ['junction', 'avenue', 'street'] as const
+const CLIPS = ['avenue', 'junction', 'street'] as const
 const OWN_FPS = 30
 const TRAIL = 24
 const FLASH_MS = 700
+const DARK_SECONDS = 2
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T
 const video = $<HTMLVideoElement>('video')
@@ -85,6 +86,12 @@ const s = {
   trails: new Map<number, Point[]>(),
   flashes: new Map<number, number>(),
   error: '',
+  /** Whether a frame of this source has had any light in it; until one has, frames are checked. */
+  lit: false,
+  /** The frame where the current run of pure black frames began, or 0. */
+  darkFrom: 0,
+  /** Pure black for DARK_SECONDS of video, with nothing lit before. */
+  blank: false,
 }
 
 /** Starts both counts over; the labels are replayed from frame `from` on. */
@@ -118,6 +125,9 @@ function load(src: Source): void {
   s.zones = d?.zones.map(([x1, y1, x2, y2]) => ({ x1, y1, x2, y2 })) ?? []
   if (d) s.line = { a: [...d.line.a], b: [...d.line.b] }
   s.frame = 0
+  s.lit = false
+  s.darkFrom = 0
+  s.blank = false
   restart(0)
   for (const a of document.querySelectorAll<HTMLAnchorElement>('#clips a'))
     a.toggleAttribute('aria-current', a.hash === `#${location.hash.slice(1) || CLIPS[0]}` && !!d)
@@ -157,12 +167,33 @@ function onFrame(_now: number, meta: VideoFrameCallbackMetadata): void {
   render()
 }
 
+// Some setups hand the page a pure black picture for every video frame: Chromium on a Linux
+// laptop with Intel and NVIDIA graphics did, with GPU compositing on. Until a frame with any
+// light in it turns up, each one is checked at thumbnail size, so the page can say so instead
+// of counting nothing.
+const thumb = new OffscreenCanvas(64, 36).getContext('2d', {
+  willReadFrequently: true,
+}) as OffscreenCanvasRenderingContext2D
+
+function look(b: ImageBitmap, frame: number): void {
+  thumb.drawImage(b, 0, 0, 64, 36)
+  const { data } = thumb.getImageData(0, 0, 64, 36)
+  // Alpha is left out: the blanked frames are opaque.
+  if (data.some((v, i) => i % 4 !== 3 && v > 0)) {
+    s.lit = true
+    s.blank = false
+  } else if (!s.darkFrom) s.darkFrom = frame
+  else if (frame - s.darkFrom >= DARK_SECONDS * (s.source?.fps ?? OWN_FPS)) s.blank = true
+}
+
 async function detect(client: DetectorClient, frame: number): Promise<void> {
   s.inflight = true
   const gen = s.gen
   const { minScore } = settings(client.model)
   try {
-    const { dets } = await client.detect(await createImageBitmap(video), minScore)
+    const bitmap = await createImageBitmap(video)
+    if (!s.lit && gen === s.gen) look(bitmap, frame)
+    const { dets } = await client.detect(bitmap, minScore)
     if (gen !== s.gen || !s.pipeline) return
     const kinds = counted()
     const { tracks, events } = s.pipeline.step(
@@ -253,6 +284,9 @@ function renderFacts(): void {
   const c = s.client
   let text: string
   if (s.error) text = `detector stopped: ${s.error}`
+  else if (s.blank)
+    text =
+      "every frame so far is pure black. If the video isn't, the browser is blanking the frames it gives this page: try another browser, or turn off hardware video decoding."
   else if (!c) text = `loading ${MODELS[s.model].name}…`
   else {
     const ep =
