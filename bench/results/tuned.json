@@ -34,5 +34,14 @@
       "buffer": 15
     },
     "wape": 0.03134328358208955
+  },
+  "dfine_n": {
+    "minScore": 0.4,
+    "tracker": {
+      "high": 0.6,
+      "newScore": 0.7,
+      "buffer": 15
+    },
+    "wape": 0.07611940298507462
   }
 }

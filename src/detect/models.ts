@@ -1,4 +1,4 @@
-export type ModelId = 'yolox_nano' | 'yolox_tiny' | 'yolox_s' | 'dfine_s'
+export type ModelId = 'yolox_nano' | 'yolox_tiny' | 'yolox_s' | 'dfine_n' | 'dfine_s'
 
 export type ModelInfo = {
   name: string
@@ -9,14 +9,20 @@ export type ModelInfo = {
 }
 
 const YOLOX = 'https://github.com/Megvii-BaseDetection/YOLOX/releases/download/0.1.1rc0'
-// The onnx-community D-FINE-n export scores visible cars at ~0.4 and misses large ones, in native
-// ONNX Runtime too, so only D-FINE-s is a candidate.
+// D-FINE-n comes from dfine-nano-coco-ONNX: the older dfine_n_coco-ONNX was exported before the
+// nano weights were fixed and scores visible cars at ~0.4.
 const HF = 'https://huggingface.co/onnx-community'
 
 export const MODELS: Record<ModelId, ModelInfo> = {
   yolox_nano: { name: 'YOLOX-nano', family: 'yolox', size: 416, url: `${YOLOX}/yolox_nano.onnx` },
   yolox_tiny: { name: 'YOLOX-tiny', family: 'yolox', size: 416, url: `${YOLOX}/yolox_tiny.onnx` },
   yolox_s: { name: 'YOLOX-s', family: 'yolox', size: 640, url: `${YOLOX}/yolox_s.onnx` },
+  dfine_n: {
+    name: 'D-FINE-n',
+    family: 'detr',
+    size: 640,
+    url: `${HF}/dfine-nano-coco-ONNX/resolve/main/onnx/model.onnx`,
+  },
   dfine_s: {
     name: 'D-FINE-s',
     family: 'detr',

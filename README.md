@@ -20,6 +20,7 @@ line, draw a new one, or drop in a video of your own street; it stays on your de
 | YOLOX-nano | 38.2% | 41.8% | 43.9% | −38.2% | 38.1% | 45.5% |
 | YOLOX-tiny | 21.2% | 22.7% | 25.3% | −18.8% | 20.8% | 42.4% |
 | YOLOX-s | 9.0% | 10.4% | 11.9% | −6.1% | 8.6% | 30.3% |
+| D-FINE-n | 7.4% | 8.2% | 9.1% | −1.5% | 6.9% | 33.3% |
 | D-FINE-s | 9.6% | 8.7% | 9.3% | −1.2% | 9.2% | 30.3% |
 
 WAPE of line counts against the labels, over 1,729 labelled crossings in 40 UA-DETRAC test sequences and MOT17-02 and -04. Lower is better; bias is the signed total error (negative: undercounts). "Every 2nd" and "every 3rd" analyse only those frames, as a device that runs at a half or a third of the video frame rate would.
@@ -34,10 +35,11 @@ results are in [`bench/results`](bench/results).
 <!-- speed -->
 | model | RTX 3050 Laptop, WebGPU | CPU, WASM: 11th Gen Intel Core i5-11320H, 8 threads |
 | --- | ---: | ---: |
-| YOLOX-nano | 13 ms · 76.8 fps | 35.6 ms · 28.1 fps |
-| YOLOX-tiny | 16.1 ms · 62.2 fps | 101.6 ms · 9.8 fps |
-| YOLOX-s | 44.2 ms · 22.6 fps | 392 ms · 2.6 fps |
-| D-FINE-s | 68.9 ms · 14.5 fps | 471.8 ms · 2.1 fps |
+| YOLOX-nano | 11.9 ms · 83.9 fps | 42 ms · 23.8 fps |
+| YOLOX-tiny | 13.3 ms · 75.4 fps | 95.5 ms · 10.5 fps |
+| YOLOX-s | 32.3 ms · 31 fps | 335.5 ms · 3 fps |
+| D-FINE-n | 50.3 ms · 19.9 fps | 128.3 ms · 7.8 fps |
+| D-FINE-s | 79.2 ms · 12.6 fps | 386.1 ms · 2.6 fps |
 
 Median time per frame for preprocessing, inference and decoding, over 200 frames after 20 warm-up frames, in Chromium 152.0.7977.82.
 <!-- /speed -->

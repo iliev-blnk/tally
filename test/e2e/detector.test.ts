@@ -64,7 +64,7 @@ function matched(dets: Detection[]): number {
 }
 
 describe('detector in the browser', () => {
-  for (const model of ['yolox_nano', 'dfine_s']) {
+  for (const model of ['yolox_nano', 'dfine_n', 'dfine_s']) {
     it(`${model} on WASM finds the labelled cars`, async () => {
       const out = await run(model, 'wasm')
       expect(out.ep).toBe('wasm')
