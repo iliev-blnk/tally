@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "A street counter that runs in the browser: detection on WebGPU, tracking and line counts, scored against labelled traffic footage.",
+  "homepage": "https://iliev-blnk.github.io/tally/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iliev-blnk/tally.git"
